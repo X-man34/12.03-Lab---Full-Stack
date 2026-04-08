@@ -1,23 +1,66 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  ol
-  each val in todos
-    li
-      span= val.task + ' - '
-      if val.completed > 0
-        span Completed
-      else
-        span Not Completed
-      form(method='POST' action='/delete')
-        input(type='hidden', name='id', value=val.id)
-        button(type='submit') Delete
+  .page-shell
+    header.hero
+      p.eyebrow Daily planner
+      h1= title
+      p.hero-copy Update tasks, mark them complete, and keep your list tidy in one place.
 
-  hr
-  h2 Add a new task
-  form(method='POST' action='/create')
-    label(for='task') Task:
-    input(type='text', name='task', id='task', required)
-    button(type='submit') Create Task
+    if errorMessage
+      .alert(role='alert')= errorMessage
+
+    section.panel
+      .panel-header
+        h2 Add a New Task
+        p Create a task with a short, clear description.
+      form.task-form(method='POST' action='/create')
+        label.sr-only(for='task') Task description
+        input(
+          type='text'
+          name='task'
+          id='task'
+          value=newTaskValue
+          maxlength='255'
+          placeholder='What do you need to get done?'
+          required
+        )
+        button.btn.btn-primary(type='submit') Create Task
+
+    section.panel
+      .panel-header
+        h2 Current Tasks
+        p Edit the wording or switch a task between completed and not completed.
+
+      if todos.length
+        ul.task-list
+          each val in todos
+            li.task-card(class=val.completed > 0 ? 'is-complete' : 'is-open')
+              .task-meta
+                span.task-id Task ##{val.id}
+                span.task-badge(class=val.completed > 0 ? 'badge-complete' : 'badge-open')
+                  = val.completed > 0 ? 'Completed' : 'Not Completed'
+
+              form.task-edit-form(method='POST' action='/update')
+                input(type='hidden', name='id', value=val.id)
+                label.sr-only(for=`task-${val.id}`) Task description
+                input.task-input(
+                  type='text'
+                  name='task'
+                  id=`task-${val.id}`
+                  value=val.task
+                  maxlength='255'
+                  required
+                )
+                label.status-field(for=`completed-${val.id}`) Status
+                select.status-select(name='completed' id=`completed-${val.id}`)
+                  option(value='0' selected=val.completed <= 0) Not Completed
+                  option(value='1' selected=val.completed > 0) Completed
+                .task-actions
+                  button.btn.btn-primary(type='submit') Save Changes
+
+              form.delete-form(method='POST' action='/delete')
+                input(type='hidden', name='id', value=val.id)
+                button.btn.btn-secondary(type='submit') Delete
+      else
+        p.empty-state No tasks yet. Add one above to get started.
