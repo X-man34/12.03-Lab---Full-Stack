@@ -1,11 +1,27 @@
-# CS208 Full Stack Final Project
+# Task Tracker
 
-## Documentation
+A simple full-stack todo app built with Express, Pug, and MySQL.
 
-- Running the example project is documented [here](docs/example_project.md)
-- An example README is provided [here](docs/README_example.md)
+## Features
 
-Students must **replace** this README with a README that is specific to your
-project. **IMPORTANT**: If you do not complete the README, your project will not
-be graded, and you will receive a zero. The TA will not guess how to set up,
-configure, and run your project.
+- Add new tasks
+- Edit existing tasks
+- Mark tasks as completed or not completed
+- Delete tasks
+- Prevent blank task submissions
+
+## Setup
+
+1. Install dependencies with `npm install`
+2. Create the database using `setup_scripts/create_demo_table.sql`
+3. Update the MySQL connection in `bin/db.js` if your local username or password is different
+
+## Run
+
+Start the app with:
+
+```powershell
+npm start
+```
+
+Then open `http://localhost:3000` in your browser.

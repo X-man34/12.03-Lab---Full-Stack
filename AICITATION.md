@@ -30,6 +30,10 @@ This file documents the AI-assisted work completed in this conversation for the 
 
 > Create an AICITATION.md file that documents all prompts and the work done in this conversation as well as model and settings.
 
+### Prompt 3
+
+> also update the readme (and citation accodingly) don't make it too crazy, just short and sweet.
+
 ## Work Completed
 
 The following work was completed in response to Prompt 1:
@@ -43,6 +47,12 @@ The following work was completed in response to Prompt 1:
 7. Added viewport metadata for better mobile rendering.
 8. Fixed a missing `createError` import in `app.js` that would affect 404 handling.
 
+The following work was completed in response to Prompts 2 and 3:
+
+1. Created `AICITATION.md` to document the prompts, work performed, verification, and known model/session settings.
+2. Replaced the placeholder `README.md` with a short project-specific README containing features, setup steps, and run instructions.
+3. Updated `AICITATION.md` to include the README request and the additional documentation work.
+
 ## Files Modified During the Session
 
 - `app.js`
@@ -50,6 +60,7 @@ The following work was completed in response to Prompt 1:
 - `views/index.pug`
 - `views/layout.pug`
 - `public/stylesheets/style.css`
+- `README.md`
 - `AICITATION.md`
 
 ## Change Details
@@ -82,6 +93,11 @@ The following work was completed in response to Prompt 1:
 ### `app.js`
 
 - Added `const createError = require('http-errors');` so the existing 404 handler works correctly.
+
+### `README.md`
+
+- Replaced the starter placeholder with a short project-specific README.
+- Added basic setup and run instructions for the Task Tracker app.
 
 ## Verification Performed
 
